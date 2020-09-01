@@ -18,10 +18,14 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String choice = reader.readLine();
+            System.out.println("Please, input the name of source file: ");
+            String source = reader.readLine();
+            System.out.println("Please, input the name of final file: ");
+            String result = reader.readLine();
             if (choice.equals("1")) {
-                alphabetSort();
+                alphabetSort(source, result);
             } else if (choice.equals("2")) {
-                counterSymbols();
+                counterSymbols(source, result);
             } else if (choice.equals("3")) {
 
             } else {
@@ -33,15 +37,15 @@ public class Main {
         }
     }
 
-    private static void alphabetSort() throws IOException {
+    private static void alphabetSort(String source, String result) throws IOException {
 
         // find file and read
-        File fileForCount = new File("file.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(fileForCount));
+        File sourceFile = new File(source);
+        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
         // create file and write
-        File counted = new File("counted.txt");
-        counted.createNewFile();
-        FileWriter writer = new FileWriter(counted);
+        File resultFile = new File(result);
+        resultFile.createNewFile();
+        FileWriter writer = new FileWriter(resultFile);
 
         List<String> strings = new ArrayList<>();
         // list of reading lines
@@ -60,15 +64,15 @@ public class Main {
 
     }
 
-    private static void counterSymbols() throws IOException {
+    private static void counterSymbols(String source, String result) throws IOException {
 
         // find file and read
-        File fileForCount = new File("file.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(fileForCount));
+        File sourceFile = new File(source);
+        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
         // create file and write
-        File counted = new File("counted.txt");
-        counted.createNewFile();
-        FileWriter writer = new FileWriter(counted);
+        File resultFile = new File(result);
+        resultFile.createNewFile();
+        FileWriter writer = new FileWriter(resultFile);
 
         List<String> strings = new ArrayList<>();
         // list of reading lines
