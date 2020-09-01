@@ -50,12 +50,13 @@ public class Main {
             // считываем строки в цикле
             strings.add(line);
         }
-
+        reader.close();
         Collections.sort(strings);
         for (int i = 0; i < strings.size(); i++) {
             writer.write(strings.get(i)+"\n");
             writer.flush();
         }
+        writer.close();
 
     }
 
@@ -76,7 +77,7 @@ public class Main {
             // считываем строки в цикле
             strings.add(line);
         }
-
+        reader.close();
         int count = strings.size();
         for (int i = 0; i < count; i++) {
             String min = strings.get(0);
@@ -91,6 +92,7 @@ public class Main {
             strings.remove(min);
 
         }
+        writer.close();
 
     }
 }
