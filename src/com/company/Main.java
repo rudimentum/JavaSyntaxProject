@@ -19,7 +19,7 @@ public class Main {
         try {
             String choice = reader.readLine();
             if (choice.equals("1")) {
-                
+                alphabetSort();
             } else if (choice.equals("2")) {
                 counterSymbols();
             } else if (choice.equals("3")) {
@@ -33,12 +33,11 @@ public class Main {
         }
     }
 
-    private static void counterSymbols() throws IOException {
+    private static void alphabetSort() throws IOException {
 
         // find file and read
         File fileForCount = new File("file.txt");
-        FileReader fr = new FileReader(fileForCount);
-        BufferedReader reader = new BufferedReader(fr);
+        BufferedReader reader = new BufferedReader(new FileReader(fileForCount));
         // create file and write
         File counted = new File("counted.txt");
         counted.createNewFile();
@@ -47,11 +46,34 @@ public class Main {
         List<String> strings = new ArrayList<>();
         // list of reading lines
         String line;
-        while (true) {
+        while ((line = reader.readLine())!=null) {
             // считываем строки в цикле
-            line = reader.readLine();
-            if (line == null)
-                break;
+            strings.add(line);
+        }
+
+        Collections.sort(strings);
+        for (int i = 0; i < strings.size(); i++) {
+            writer.write(strings.get(i)+"\n");
+            writer.flush();
+        }
+
+    }
+
+    private static void counterSymbols() throws IOException {
+
+        // find file and read
+        File fileForCount = new File("file.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(fileForCount));
+        // create file and write
+        File counted = new File("counted.txt");
+        counted.createNewFile();
+        FileWriter writer = new FileWriter(counted);
+
+        List<String> strings = new ArrayList<>();
+        // list of reading lines
+        String line;
+        while ((line = reader.readLine())!=null) {
+            // считываем строки в цикле
             strings.add(line);
         }
 
@@ -64,15 +86,11 @@ public class Main {
                     min = strings.get(j);
             }
             writer.write(min+"\n");
-
-            // метод flush() выбрасывает всё из буфера в соответствующий поток
-            // без него не работает
             writer.flush();
 
             strings.remove(min);
 
         }
-
 
     }
 }
