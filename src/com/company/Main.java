@@ -18,9 +18,9 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String choice = reader.readLine();
-            System.out.println("Please, input the name of source file: ");
+            System.out.println("Please, input the name of the source file: ");
             String source = reader.readLine();
-            System.out.println("Please, input the name of final file: ");
+            System.out.println("Please, input the name of the final file: ");
             String result = reader.readLine();
             if (choice.equals("1")) {
                 alphabetSort(source, result);
@@ -37,10 +37,44 @@ public class Main {
         }
     }
 
+    private static File repeatLinesCounter(String source) throws IOException {
+
+        File sourceFile = new File(source);
+        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
+
+        File resultFile = new File("repeat.txt");
+        resultFile.createNewFile();
+        FileWriter writer = new FileWriter(resultFile);
+
+        List<String> strings = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine())!=null) {
+            // считываем строки в цикле
+            strings.add(line);
+        }
+
+        reader.close();
+
+        for (int i = 0; i < strings.size(); i++) {
+            int countOfLineRepeat = 0;
+            String currentString = strings.get(i);
+            for (int j = 0; j < strings.size(); j++) {
+                if (currentString.equals(strings.get(j)))
+                    countOfLineRepeat++;
+            }
+            writer.write(currentString+" " +countOfLineRepeat+"\n");
+            writer.flush();
+        }
+
+        writer.close();
+
+        return resultFile;
+    }
+
     private static void alphabetSort(String source, String result) throws IOException {
 
         // find file and read
-        File sourceFile = new File(source);
+        File sourceFile = repeatLinesCounter(source);
         BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
         // create file and write
         File resultFile = new File(result);
@@ -67,7 +101,7 @@ public class Main {
     private static void counterSymbols(String source, String result) throws IOException {
 
         // find file and read
-        File sourceFile = new File(source);
+        File sourceFile = repeatLinesCounter(source);
         BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
         // create file and write
         File resultFile = new File(result);
@@ -99,4 +133,6 @@ public class Main {
         writer.close();
 
     }
+
 }
+

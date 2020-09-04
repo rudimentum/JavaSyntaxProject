@@ -1,7 +1,7 @@
-Johny loves Cate
-Mary loves Anthony
-Anthony loves Johny
-A cat runs from a dog
-A mouse runs from a cat
-A mouse runs from a cat
-A dog try to catch a cat
+Johny loves Cate 1
+Mary loves Anthony 1
+Anthony loves Johny 1
+A cat runs from a dog 1
+A mouse runs from a cat 2
+A mouse runs from a cat 2
+A dog try to catch a cat 1
