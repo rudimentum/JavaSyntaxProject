@@ -37,23 +37,34 @@ public class Main {
         }
     }
 
-    private static File repeatLinesCounter(String source) throws IOException {
+    private static List<String> lineReader(File file) throws IOException {
 
-        File sourceFile = new File(source);
+        // find file and read
+        File sourceFile = file;
         BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
 
-        File resultFile = new File("repeat.txt");
-        resultFile.createNewFile();
-        FileWriter writer = new FileWriter(resultFile);
-
+        // put lines is list
         List<String> strings = new ArrayList<>();
         String line;
         while ((line = reader.readLine())!=null) {
-            // считываем строки в цикле
             strings.add(line);
         }
 
         reader.close();
+
+        return strings;
+
+    }
+
+    private static File repeatLinesCounter(String source) throws IOException {
+
+        // put lines in list
+        List<String> strings = lineReader(new File(source));
+
+        // create file and write
+        File resultFile = new File("repeat.txt");
+        resultFile.createNewFile();
+        FileWriter writer = new FileWriter(resultFile);
 
         for (int i = 0; i < strings.size(); i++) {
             int countOfLineRepeat = 0;
@@ -73,25 +84,18 @@ public class Main {
 
     private static void alphabetSort(String source, String result) throws IOException {
 
-        // find file and read
+        // count repeats, put lines in list
         File sourceFile = repeatLinesCounter(source);
-        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
+        List<String> strings = lineReader(sourceFile);
+
         // create file and write
         File resultFile = new File(result);
         resultFile.createNewFile();
         FileWriter writer = new FileWriter(resultFile);
 
-        List<String> strings = new ArrayList<>();
-        // list of reading lines
-        String line;
-        while ((line = reader.readLine())!=null) {
-            // считываем строки в цикле
-            strings.add(line);
-        }
-        reader.close();
         Collections.sort(strings);
-        for (int i = 0; i < strings.size(); i++) {
-            writer.write(strings.get(i)+"\n");
+        for (String s : strings) {
+            writer.write(s+"\n");
             writer.flush();
         }
         writer.close();
@@ -100,22 +104,15 @@ public class Main {
 
     private static void counterSymbols(String source, String result) throws IOException {
 
-        // find file and read
+        // count repeats, put lines in list
         File sourceFile = repeatLinesCounter(source);
-        BufferedReader reader = new BufferedReader(new FileReader(sourceFile));
+        List<String> strings = lineReader(sourceFile);
+
         // create file and write
         File resultFile = new File(result);
         resultFile.createNewFile();
         FileWriter writer = new FileWriter(resultFile);
 
-        List<String> strings = new ArrayList<>();
-        // list of reading lines
-        String line;
-        while ((line = reader.readLine())!=null) {
-            // считываем строки в цикле
-            strings.add(line);
-        }
-        reader.close();
         int count = strings.size();
         for (int i = 0; i < count; i++) {
             String min = strings.get(0);
