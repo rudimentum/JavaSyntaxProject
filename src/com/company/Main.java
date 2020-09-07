@@ -27,7 +27,7 @@ public class Main {
             } else if (choice.equals("2")) {
                 counterSymbols(source, result);
             } else if (choice.equals("3")) {
-
+                wordSort(source, result);
             } else {
                 System.out.println("Wrong input!");
                 menu();
@@ -129,6 +129,43 @@ public class Main {
         }
         writer.close();
 
+    }
+
+    private static void wordSort(String source, String result) throws IOException {
+
+        // count repeats, put lines in list
+        File sourceFile = repeatLinesCounter(source);
+        List<String> strings = lineReader(sourceFile);
+
+        // create file and write
+        File resultFile = new File(result);
+        resultFile.createNewFile();
+        FileWriter writer = new FileWriter(resultFile);
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please input the number of the word for sorting, starts from one");
+        int word = Integer.parseInt(reader.readLine());
+        word++;
+        reader.close();
+        int count = strings.size();
+        for (int i = 0; i < count; i++) {
+            String min = strings.get(0);
+            String[] firstArray = min.split("\\s");
+
+            for (int j = 0; j < strings.size(); j++) {
+
+                String[] secondArray = strings.get(j).split("\\s");
+                if (firstArray[word].compareTo(secondArray[word]) > 0) {
+                    min = strings.get(j);
+                }
+            }
+            writer.write(min+"\n");
+            writer.flush();
+
+            strings.remove(min);
+
+        }
+        writer.close();
     }
 
 }
