@@ -12,20 +12,20 @@ public class Main {
     public static void menu() {
         System.out.println("Choose method of sort : \n" +
                 "Press 1 for alphabet sort \n" +
-                "Press 2 for count of symbols sort \n" +
-                "Press 3 for word sort ");
+                "Press 2 for length sort \n" +
+                "Press 3 for word sort \n> ");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String choice = reader.readLine();
-            System.out.println("Please, input the name of the source file: ");
+            System.out.println("Please, input the name of the source file: \n> ");
             String source = reader.readLine();
-            System.out.println("Please, input the name of the final file: ");
+            System.out.println("Please, input the name of the final file: \n> ");
             String result = reader.readLine();
             if (choice.equals("1")) {
                 alphabetSort(source, result);
             } else if (choice.equals("2")) {
-                counterSymbols(source, result);
+                lengthSort(source, result);
             } else if (choice.equals("3")) {
                 wordSort(source, result);
             } else {
@@ -46,7 +46,7 @@ public class Main {
         // put lines is list
         List<String> strings = new ArrayList<>();
         String line;
-        while ((line = reader.readLine())!=null) {
+        while ((line = reader.readLine()) != null) {
             strings.add(line);
         }
 
@@ -102,7 +102,7 @@ public class Main {
 
     }
 
-    private static void counterSymbols(String source, String result) throws IOException {
+    private static void lengthSort(String source, String result) throws IOException {
 
         // count repeats, put lines in list
         File sourceFile = repeatLinesCounter(source);
@@ -143,10 +143,11 @@ public class Main {
         FileWriter writer = new FileWriter(resultFile);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please input the number of the word for sorting, starts from one");
+        System.out.println("Please input the number of the word for sorting, starts from one \n> ");
         int word = Integer.parseInt(reader.readLine());
         word++;
         reader.close();
+
         int count = strings.size();
         for (int i = 0; i < count; i++) {
             String min = strings.get(0);
