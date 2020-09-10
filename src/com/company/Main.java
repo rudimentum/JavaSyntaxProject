@@ -22,15 +22,19 @@ public class Main {
             String source = reader.readLine();
             System.out.println("Please, input the name of the final file: \n> ");
             String result = reader.readLine();
-            if (choice.equals("1")) {
-                alphabetSort(source, result);
-            } else if (choice.equals("2")) {
-                lengthSort(source, result);
-            } else if (choice.equals("3")) {
-                wordSort(source, result);
-            } else {
-                System.out.println("Wrong input!");
-                menu();
+            switch (choice) {
+                case "1":
+                    alphabetSort(source, result);
+                    break;
+                case "2":
+                    lengthSort(source, result);
+                    break;
+                case "3":
+                    wordSort(source, result);
+                    break;
+                default:
+                    System.out.println("Wrong input!");
+                    menu();
             }
         } catch (IOException e) {
             e.printStackTrace();
